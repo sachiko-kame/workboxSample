@@ -12,6 +12,22 @@ workbox.setConfig({
 });
 
 workbox.routing.registerRoute(
+    '/',
+    new workbox.strategies.CacheFirst({
+        cacheName: 'cache',
+        plugins: []
+    })
+);
+
+workbox.routing.registerRoute(
+    new RegExp(/.*\.js/),
+    new workbox.strategies.NetworkFirst({
+        cacheName: 'js-cache',
+    })
+);
+
+
+workbox.routing.registerRoute(
     '/favicon.ico',
     new workbox.strategies.NetworkFirst({
         cacheName: 'icon'
